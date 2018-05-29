@@ -21,9 +21,7 @@ train_detail = { 'id': '',
          'steps': '',
          'intr': '',
          'course_plan_actions': [
-            train_step,
-            train_step,
-            train_step
+
          ],
          'percent': '',
          'background_image': '',
@@ -46,9 +44,7 @@ course_plan_model = {
     'intr_content':'',
     'intr_weeks': '',
     'course_plan_days': [
-        plan_item_model,
-        plan_item_model,
-        plan_item_model
+
     ],
     'total_minutes': 20,
     'total_days': 9,
@@ -68,15 +64,17 @@ medal = {
 
 
 
-from flask import render_template, flash, jsonify
+from flask import render_template, flash, jsonify, url_for
 
 from . import api
 from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth()
+from ..models.TrainStep import TrainStep
 
 @api.route('/plans')
 # @auth.login_required
 def get_plans():
+    medal['image'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
     return jsonify({'message': 'ok', 'code': 0, 'data': course_plan_model})
 
 @api.route('/plans/<int:id>/join', methods=['POST'])
@@ -87,4 +85,8 @@ def post_join(id):
 @api.route('/plans/<int:id>/days/<int:day>')
 # @auth.login_required
 def get_trains(id, day):
+    steps = TrainStep.query.all()
+    steps_dics  = [step.toDict() for step in steps]
+    train_detail['course_plan_actions'] = steps_dics
+    train_detail['background_image'] = url_for('static', filename='img/training_details_image.png', _external=True)
     return jsonify({'message': 'ok', 'code': 0, 'data': train_detail})

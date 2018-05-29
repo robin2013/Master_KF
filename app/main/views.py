@@ -4,8 +4,16 @@ from . import main
 
 from ..models import User, Role
 from app import db
+from ..models.Medal import Medal
+from ..models.TrainStep import TrainStep
 
-
+@main.route('/initial')
+def initial():
+    db.drop_all()
+    db.create_all()
+    Medal.ready()
+    TrainStep.ready()
+    return render_template('index.html')
 
 @main.route('/')
 def index():

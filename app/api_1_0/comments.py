@@ -30,7 +30,7 @@ detail = {
     ]
 }
 
-from flask import render_template, flash, jsonify, json
+from flask import render_template, flash, jsonify, json, request
 from app.models.Comment import Comment
 from . import api
 from flask_httpauth import HTTPBasicAuth
@@ -41,12 +41,18 @@ auth = HTTPBasicAuth()
 def get_comments():
     # return jsonify({'message': 'users', 'code': 0, 'data': detail})
     coms = Comment.query.all()
-    return jsonify({'message': 'ok', 'code': 0, 'data': [com.toDict() for com in coms]})
+    data = {
+    'rows': [com.toDict() for com in coms],
+        'limit': 10,
+        'count':5,
+        'offset':1
+    }
+    return jsonify({'message': 'ok', 'code': 0, 'data': data})
 
 @api.route('/comments', methods=['POST'])
 def post_comment():
-
-    comp = Comment(comment='dd')
+    comment = request.json.get('comment')
+    comp = Comment(comment=comment)
     comp.save()
     print(comp)
     return jsonify({'message': 'comment ok', 'code': 0, 'data': comp.toDict()})
