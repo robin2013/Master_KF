@@ -9,7 +9,7 @@ from app import db
 
 @main.route('/')
 def index():
-    db.create_all()
+    # db.create_all()
     return render_template('index.html')
 
 @main.route('/user/<name>')
