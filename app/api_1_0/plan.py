@@ -1,19 +1,6 @@
 
 
 
-train_step = {
-    'id':1,
-    'sequence':2,
-    'minutes': 20,
-    'name': 'step',
-    'title': '训练计划',
-    'video': 'http://v.tiaooo.com/lmhowNz5Y2o_o-BF4PiNpQadmnfr',
-    'icon': 'http://www.ghost64.com/qqtupian/zixunImg/local/2017/08/08/1502123665822.jpg',
-    'start_time':'',
-    'end_time': ''
-
-}
-
 train_detail = { 'id': '',
          'title': '',
          'minutes': '',
@@ -90,3 +77,8 @@ def get_trains(id, day):
     train_detail['course_plan_actions'] = steps_dics
     train_detail['background_image'] = url_for('static', filename='img/training_details_image.png', _external=True)
     return jsonify({'message': 'ok', 'code': 0, 'data': train_detail})
+
+@api.route('/records', methods=['POST'])
+def finihsed():
+    medal['image'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
+    return jsonify({'message': 'ok', 'code': 0, 'data': {'medals':[medal]}})

@@ -58,4 +58,6 @@ def get_course(id):
     detail['party']['intr_image'] = url_for('static', filename='img/training_details_image.png', _external=True)
 
     return jsonify({'message': 'users', 'code': 0, 'data': detail})
-    # return jsonify({'message': 'users', 'code': 0, 'data': ''})
+
+
+
