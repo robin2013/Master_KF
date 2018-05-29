@@ -43,7 +43,7 @@ medal = {
     'name': '初学者',
     'intr': '初学者',
     'own': 1,
-    'gain': '11',
+    'gain': '再接再厉',
     'image_light':'http://www.ghost64.com/qqtupian/zixunImg/local/2017/08/08/1502123665822.jpg',
     'image_grey':'http://www.ghost64.com/qqtupian/zixunImg/local/2017/08/08/1502123665822.jpg',
     'created_at':'2018-05-09 17:20:08.444z'
@@ -61,7 +61,7 @@ from ..models.TrainStep import TrainStep
 @api.route('/plans')
 # @auth.login_required
 def get_plans():
-    medal['image'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
+    medal['image_light'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
     return jsonify({'message': 'ok', 'code': 0, 'data': course_plan_model})
 
 @api.route('/plans/<int:id>/join', methods=['POST'])
@@ -80,5 +80,5 @@ def get_trains(id, day):
 
 @api.route('/records', methods=['POST'])
 def finihsed():
-    medal['image'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
+    medal['image_light'] = url_for('static', filename='img/medal/medal_Introduction_get.png', _external=True)
     return jsonify({'message': 'ok', 'code': 0, 'data': {'medals':[medal]}})
