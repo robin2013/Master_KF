@@ -45,7 +45,7 @@ def get_comments():
 
 @api.route('/comments', methods=['POST'])
 def post_comment():
-    db.create_all()
+
     comp = Comment(comment='dd')
     comp.save()
     print(comp)
