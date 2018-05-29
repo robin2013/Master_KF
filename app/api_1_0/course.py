@@ -3,6 +3,7 @@ from flask import render_template, flash, jsonify, url_for
 from . import api
 from flask_httpauth import HTTPBasicAuth
 auth = HTTPBasicAuth()
+from app.models.Comment import Comment
 
 detail = {
     'name':'少林大通臂拳',
@@ -45,6 +46,8 @@ detail = {
 @api.route('/courses/<int:id>')
 # @auth.login_required
 def get_course(id):
-    print( url_for('static', filename = 'img/medal_Introduction_get.png', _external=True))
+    coms = Comment.query.all()
+    array = [com.toDict() for com in coms]
+    detail['comments']['rows'] = array
     return jsonify({'message': 'users', 'code': 0, 'data': detail})
     # return jsonify({'message': 'users', 'code': 0, 'data': ''})

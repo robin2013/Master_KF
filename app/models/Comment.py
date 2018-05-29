@@ -1,4 +1,6 @@
 from datetime import datetime
+from flask import  url_for
+from flask import  url_for
 
 from app import db
 
@@ -21,6 +23,10 @@ class Comment(db.Model):
          dic = {
              'id': self.id,
              'comment': self.comment,
-             'created_at': self.created_at
+             'created_at': self.created_at,
+             'user': {
+                 'name': 'robin',
+                 'image': url_for('static', filename='img/m1.png', _external=True)
+             }
          }
          return dic
